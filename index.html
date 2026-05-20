@@ -1,0 +1,199 @@
+	<!DOCTYPE html>
+	<html >
+	<head>
+	<title>TextIt</title>
+	<!-- Firebase (compat version) -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+	<link rel ="stylesheet" href="style.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Anta&family=Audiowide&family=Cantarell:ital,wght@0,400;0,700;1,400;1,700&family=Geostar&family=Merriweather+Sans:ital,wght@0,300..800;1,300..800&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Rationale&family=Tektur:wght@400..900&family=Tourney:ital,wght@0,100..900;1,100..900&family=Turret+Road&family=Wallpoet&display=swap" rel="stylesheet">
+	</head>
+
+	<body>
+	<div class="main-screen">
+
+	<div class="logo-box">
+	<img src="logoSticker.png" width="60">
+	<span class="logo-text"></span>
+	</div>
+	<div class="display-logo">
+	<img src="logoSticker.png" width="60">
+	<span class="logo-text"></span>
+	</div>
+	<div class="cont2">
+	<h1>WELCOME</h1>
+	<br>
+	<button type="submit" id="loginBtn">Login</button>
+	<button type="submit" id="signupBtn">Sign Up</button>
+	</div>
+
+										  <!-- SIGNUP -->
+	<div class="sign" id="signupPage">
+	<div class="cont4">
+	<h2>Sign Up</h2><br>
+	<input id="number" placeholder="Mobile number">
+	<input id="password" type="password" placeholder="Create Password">	
+	<input id="confirm-password" type="password" placeholder="Confirm Password">
+	<p id="captcha" >Solve:<br> <span id="captchaQuestion"></span></p>
+	<input type ="number" id="captchaInput">
+	<br><br>
+	<button  type="submit"  id="submitBtn">Submit</button>
+
+	<button onclick="goBack()">Back</button>
+	<br><br>
+	<p class="signupResult"></p>
+	</div>
+	</div>
+
+											<!-- LOGIN -->
+	<div class="sign" id="loginPage">
+	<div class="cont4">
+	<h2>Login</h2>
+	<input id="contact" placeholder="Mobile number">
+	<input id="pass" type="password" placeholder="Password">
+	<button  type="submit"  id="validate">Submit</button>
+	<button onclick="goBack()">Back</button>
+	<br><br>
+	<p class="validmess"></p>
+	</div>
+	</div>
+
+	<!-- ADD CONTACT -->
+	<div class="sign" id="addContact">
+	<div class="cont4">
+	<h2>Add Contacts</h2>
+	<input class="name" placeholder="Name">
+	<input class="cnumber" placeholder="Number">
+	<button class="add">Add</button>
+	<button id="finish">Finish</button>
+	<ol id="list"></ol>
+	</div>
+	</div>
+	</div>
+
+											<!--POP-Page--> 
+	<div class="tab5">
+
+	<img src="logoSticker.png">
+	<p class="logo-text"  ></p>
+	</div>	
+											<!--ChatPage-->
+	<div class="chat">
+
+	<div class="header">
+	<span class="logo-text"></span>
+	<div class="profile"></div>
+	<img class = "qr" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://textitok.netlify.app/">
+	</div>
+	<div id="profileHover">
+	<p id="pName"></p>
+	<p id="pNumber"></p>
+	<button onclick="logout()">Logout</button>
+	</div>
+	<input id="searchbar" type="text" placeholder="Search">
+	<!-- Show chats -->
+	<div>
+	<div class="chat-list"></div>
+	</div>
+	<button class="new" id="newchat">💬</button>
+	</div>
+	<div class="popup" id="profilePopup" style="display:none;">
+	<div class="popupbox">
+	<h3>Enter your name</h3>
+	<input type="text" id="profileName" placeholder="Your name">
+	
+	<br>
+	<button onclick="saveProfile()">Save</button>
+	<button onclick="skipProfile()">Skip</button>
+	</div>
+	</div>
+	
+								<!-- CONTACT SCREEN -->
+	<div class="tab6">
+	<div class="log">
+	<span onclick="go()" style="margin-right:10px; cursor:pointer;">←</span>
+	<span class="logo-text"></span>
+	</div>
+	<div class="main"></div>
+	<button class="newadd" id="addchat">+</button>
+	<div class="cont4"  style="display:none";>
+	<h2>Add Contacts</h2>
+	<input class="name" placeholder="Name">
+	<input class ="cnumber" placeholder="Number">
+	<button class="add">Add</button>
+	<button onclick="closepop()">close</button>
+	<ol id="list"></ol>
+	</div>
+	</div>
+
+
+	<div class="box">
+
+	<!-- HEADER -->
+	<div class="header">
+	<span id="backBtn">←</span>
+
+	<div id="chatInfo">
+	<div id="chatAvatar"></div>
+	<span id="chatName"></span>
+	
+	
+	</div>
+
+	</div>
+
+	<!-- CHAT -->
+	<div class="chat-body" id="chatBody"></div>
+
+	<!-- CHAT BAR -->
+	<div class="chat-bar">
+
+	<!-- File -->
+	<label class="icon-btn">
+	📎
+	<input type="file" id="fileInput">
+	</label>
+
+	<!-- Photo -->
+	<label class="icon-btn">
+	🖼️
+	<input type="file" accept="image/*" id="photoInput">
+	</label>
+
+	<!-- Camera -->
+	<button class="icon-btn" id="openCamera">📷</button>
+
+	<!-- Preview -->
+	<img id="previewImg" class="preview" style="display:none;">
+
+	<!-- Text -->
+	<input type="text" id="message" class="chat-input" placeholder="Type a message">
+
+	<!-- Send -->
+	<button class="send-btn" id="send">➤</button>
+
+	</div>
+
+	</div>
+
+	<!-- CAMERA -->
+	<div id="cameraBox">
+	<video id="video" autoplay></video>
+	<br>
+	<button id="capture">Capture</button>
+	<button id="closeCam">Close</button>
+	</div>
+
+	<!-- IMAGE PREVIEW -->
+	<div id="imgPreview">
+	<img id="fullImg">
+	</div>
+	
+	<script src="script.js"></script>
+	</body>
+	</html>
+	
