@@ -439,7 +439,7 @@ let existing = $(".chat-item[data-number='"+number+"']");
 	<!-- Text container -->
 	<div style="display:flex; flex-direction:column;">
 	<span style="font-weight:600;font-family: 'Merriweather Sans', sans-serif;">${name}</span>
-	<span class="lastMsg" style= color:#777;">${message}</span>
+	<span class="lastMsg" style= "color:#777;">${message}</span>
 	</div>
 
 	</div>
