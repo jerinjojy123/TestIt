@@ -212,7 +212,7 @@ updateChatList(name, "📷 Photo", currentUser);
     $("#previewImg").hide();
   }
 $("#message").val("");
-scrollDown();   // 🔥 add this
+scrollDown();   
 });
 
 
@@ -230,7 +230,7 @@ function listenMessages(){
 
     let sender = msg.sender;
 
-    // 🔥 ADD THIS BLOCK
+    //  ADD THIS BLOCK
     if(sender !== savedNumber){
 
       let name = $(".cbutton").filter(function(){
@@ -290,29 +290,30 @@ $(document).on("mousedown touchstart", ".msg, .msg-img", function(){
     let msgId = element.attr("data-id");
     let chatId = getChatId(savedNumber, currentUser);
 
-    // 🔥 check if message is yours
+    // check if message is yours
     let isMine = element.hasClass("sent");
 
     let choice;
 
     if(isMine){
-      // ✅ sender → both options
+      //  sender both options
       choice = prompt(
         "Type:\n1 → Delete for me\n2 → Delete for everyone"
       );
     } else {
-      // ❌ receiver → only delete for me
-      choice = prompt(
-        "Type:\n1 → Delete for me"
-      );
+      // receiver only delete for me
+     let result= confirm("Delete");
+	 if (result){
+		 element.remove();
     }
+	}
 
-    // 🔹 Delete for me
+    //  Delete for me
     if(choice === "1"){
       element.remove();
     }
 
-    // 🔹 Delete for everyone (only if sender)
+    //  Delete for everyone (only if sender)
     else if(choice === "2" && isMine){
       db.ref("chats/" + chatId + "/" + msgId).remove();
       element.remove();
@@ -579,19 +580,16 @@ $(document).on("click", ".chat-item", function(){
 	/* ================= FLOW ================= */
 	$("#finish").click(function () {
 	$(".main-screen").hide();
-
-	// show with transition
 	$(".tab5").addClass("show");
 
 	setTimeout(function () {
-	// hide with transition
 	$(".tab5").removeClass("show");
 
 	setTimeout(function () {
 	$(".chat").fadeIn(200);
 	$("#profilePopup").fadeIn(400);
-	}, 200); // wait for fade-out
-	}, 4000); // duration of logo animation
+	}, 200); 
+	}, 4000); 
 	});
 	$("#newchat").click(()=>{
 	$(".chat,.new").hide();
@@ -703,4 +701,3 @@ function showAllUsers(){
 
   });
 }
-addchat
