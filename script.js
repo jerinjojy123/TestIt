@@ -184,6 +184,7 @@ newMsgRef.set({
   type: "text",
   time: Date.now()
 });
+	   capturedImage = "";
 let name = $(".cbutton").filter(function(){
   return $(this).find("small").text() === currentUser;
 }).find("span").text() || currentUser;
